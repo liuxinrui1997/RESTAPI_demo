@@ -1,0 +1,45 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    implementation ('org.springframework.boot:spring-boot-starter-data-redis')
+    implementation ('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation ('org.springframework.boot:spring-boot-starter-data-rest')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+//    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.apache.commons:commons-pool2')
+//    compile(group: "com.github.java-json-tools", name: "json-schema-validator", version: "2.2.14");
+//    compile group: 'io.rocketbase.commons', name: 'commons-auth-adapter', version: '2.0.0'
+//    compile group: 'org.visola.spring.security', name: 'spring-security-token-filter', version: '1.0'
+    implementation('io.jsonwebtoken:jjwt-api:0.11.1')
+    implementation('io.jsonwebtoken:jjwt-impl:0.11.1')
+    compile "com.github.everit-org.json-schema:org.everit.json.schema:1.12.1"
+    compile ('com.github.fge:json-patch:1.9')
+    compile('org.glassfish:javax.json:1.1')
+    runtimeOnly ('com.h2database:h2')
+    implementation('redis.clients:jedis')
+    compileOnly('org.springframework.data:spring-data-redis')
+    compileOnly('org.projectlombok:lombok')
+    testImplementation('org.springfamework.security:spring-security-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('io.projectreactor:reactor-test')
+}
+
+test {
+    useJUnitPlatform()
+}
