@@ -6,6 +6,9 @@ import com.demo.config.PlanAlreadyExistException;
 import com.demo.config.PlanNotFoundException;
 import com.demo.repo.PlanRepository;
 import com.github.fge.jsonpatch.JsonPatchException;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
@@ -28,6 +31,15 @@ public class PlanController {
     public PlanController(PlanRepository repository, JsonValidator jsonValidator) {
         this.repository = repository;
         this.jsonValidator = jsonValidator;
+    }
+
+    @GetMapping("/token")
+    public String getToken() throws UnirestException {
+        HttpResponse<String> response = Unirest.post("https://dev-auth97.us.auth0.com/oauth/token")
+                .header("content-type", "application/json")
+                .body("{\"client_id\":\"SeVJHSZz06GfQ7pLFLDNiafU3aiJC18k\",\"client_secret\":\"6ZskW3wl3BKF_GYXf47PULzHDaFUQvG5_GGRtIhs4XbvPwyMPMUMei0ME6lJfUTR\",\"audience\":\"https://adb.demo/api\",\"grant_type\":\"client_credentials\"}")
+                .asString();
+        return response.getBody();
     }
 
     @GetMapping("/plan")

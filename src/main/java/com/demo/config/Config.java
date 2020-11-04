@@ -35,10 +35,7 @@ public class Config {
         return redisTemplate;
     }
 
-    @Bean
-    public Filter shallowEtagHeaderFilter() {
-        return new ShallowEtagHeaderFilter();
-    }
+
 
 
 
